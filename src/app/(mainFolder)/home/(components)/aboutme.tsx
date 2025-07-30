@@ -4,9 +4,8 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { Paintbrush, ClipboardList, BookOpenText,Code2 } from "lucide-react"
 import { motion } from "framer-motion"
-import Link from "next/link"
+
 export default function Aboutme() {
-  const animatedWords = ["UI Designing", "Project Management","Web development"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [displayedText, setDisplayedText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
@@ -14,6 +13,8 @@ export default function Aboutme() {
 
   useEffect(() => {
     let timeout: NodeJS.Timeout
+      const animatedWords = ["UI Designing", "Project Management","Web development"]
+
     const currentWord = animatedWords[currentWordIndex]
 
     if (isTyping) {
@@ -40,7 +41,7 @@ export default function Aboutme() {
     }
 
     return () => clearTimeout(timeout)
-  }, [charIndex, isTyping, currentWordIndex, animatedWords])
+  }, [charIndex, isTyping, currentWordIndex])
 
   return (
     <motion.div
@@ -54,7 +55,7 @@ export default function Aboutme() {
           {/* Left Column: Text Content */}
           <div className="space-y-6">
             <h1 className="text-4xl md:text-4xl lg:text-5xl font-bold leading-tight mt-10">
-              <span className="text-white">Hi , I&apos;m </span>
+              <span className="text-white">Hi , I am </span>
               <span className="text-[#FFD300]">Amali Perera</span>
             </h1>
            <h2 className="text-2xl md:text-2xl lg:text-3xl font-semibold text-white min-h-[3rem] flex flex-wrap items-start">

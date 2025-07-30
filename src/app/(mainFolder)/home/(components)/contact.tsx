@@ -20,31 +20,32 @@ export default function Contact() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus("sending")
-    setErrorMsg("")
+  e.preventDefault()
+  setStatus("sending")
+  setErrorMsg("")
 
-    try {
-      const res = await fetch("https://formspree.io/f/mwpqbjnj", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+  try {
+    const res = await fetch("https://formspree.io/f/mwpqbjnj", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
 
-      if (res.ok) {
-        setStatus("success")
-        setFormData({ name: "", email: "", message: "" })
-      } else {
-        setStatus("error")
-        setErrorMsg("Failed to send message. Please try again later.")
-      }
-    } catch (error) {
+    if (res.ok) {
+      setStatus("success")
+      setFormData({ name: "", email: "", message: "" })
+    } else {
       setStatus("error")
-      setErrorMsg("An unexpected error occurred. Please try again later.")
+      setErrorMsg("Failed to send message. Please try again later.")
     }
+  } catch (_error) {
+    setStatus("error")
+    setErrorMsg("An unexpected error occurred. Please try again later.")
   }
+}
+
 
   return (
     <section

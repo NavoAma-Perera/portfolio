@@ -3,29 +3,32 @@
 import { Lightbulb, Code2 } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
+import Image from "next/image"
 
 function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
+// Move softSkills outside component to avoid useEffect warnings
+const softSkills: string[] = [
+  "Communication",
+  "Problem-solving",
+  "Teamwork & Collaboration",
+  "Adaptability",
+  "Time Management",
+  "Critical Thinking",
+  "Active Listening",
+  "Empathy",
+  "Creativity",
+  "Leadership",
+]
+
 export default function SkillsSection() {
-  const softSkills: string[] = [
-    "Communication",
-    "Problem-solving",
-    "Teamwork & Collaboration",
-    "Adaptability",
-    "Time Management",
-    "Critical Thinking",
-    "Active Listening",
-    "Empathy",
-    "Creativity",
-    "Leadership",
-  ]
   const [visibleSkills, setVisibleSkills] = useState<string[]>([])
   const [mounted, setMounted] = useState(false)
   const [isClient, setIsClient] = useState(false)
-  const skillRef = useRef(null)
-  const toolsRef = useRef(null)
+  const skillRef = useRef<HTMLDivElement | null>(null)
+  const toolsRef = useRef<HTMLDivElement | null>(null)
   const isSkillInView = useInView(skillRef, { once: true, margin: "-100px" })
   const isToolsInView = useInView(toolsRef, { once: true, margin: "-100px" })
 
@@ -55,7 +58,6 @@ export default function SkillsSection() {
       transform: `translate(-50%, -50%)`,
     }
   }
-const hasAnimatedRef = useRef(false)
 
   return (
     <div className="min-h-screen py-12">
@@ -68,13 +70,12 @@ const hasAnimatedRef = useRef(false)
         className="w-full py-12 md:py-24 lg:py-12 flex items-center justify-center"
       >
         <div className="container px-4 md:px-6 flex flex-col items-center justify-center space-y-10 sm:space-y-12 text-center">
-        <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
-  <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
-  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-    Skills & Technologies
-  </h2>
-</div>
-
+          <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
+            <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              Skills & Technologies
+            </h2>
+          </div>
 
           <div className="relative flex items-center justify-center w-full">
             {/* Desktop Circular Layout */}
@@ -188,10 +189,12 @@ const hasAnimatedRef = useRef(false)
                 className="flex flex-col items-center space-y-2 group transition-transform hover:scale-105"
               >
                 <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-700 group-hover:border-yellow-400 transition-all duration-300 ease-in-out">
-                  <img
+                  <Image
                     src={tool.icon}
                     alt={tool.name}
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+                    width={56}
+                    height={56}
+                    className="object-contain"
                   />
                 </div>
                 <span className="text-sm sm:text-base md:text-lg font-medium text-gray-200 group-hover:text-yellow-400 transition-colors">

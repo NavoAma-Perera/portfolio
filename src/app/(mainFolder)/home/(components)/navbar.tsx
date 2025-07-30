@@ -14,11 +14,10 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"
 
-import { Menu, X } from "lucide-react"
+import { Menu} from "lucide-react"
 
 // Import your section components
-import Aboutme from "./aboutme"
-import Skills from "./skills"
+
 //import Projects from "@/components/projects"
 //import Contact from "@/components/contact"
 
