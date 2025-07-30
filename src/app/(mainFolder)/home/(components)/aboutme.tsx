@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { Paintbrush, ClipboardList, BookOpenText,Code2 } from "lucide-react"
 import { motion } from "framer-motion"
-
+import Link from "next/link"
 export default function Aboutme() {
   const animatedWords = ["UI Designing", "Project Management","Web development"]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
@@ -64,7 +64,7 @@ export default function Aboutme() {
   >
     <span
       className="text-white whitespace-nowrap"
-      style={{ filter: "drop-shadow(0 4px 8px rgba(255, 211, 0, 0.8))" }}
+      style={{ filter: "drop-shadow(0 4px 8px rgba(255, 211, 0, 0.3))" }}
     >
       {displayedText}
     </span>
@@ -93,12 +93,26 @@ export default function Aboutme() {
 </p>
 
 <p className="text-gray-200 text-xl leading-relaxed">
+  I often go by <span className="text-[#FFD300] font-semibold">SNAP</span>, a creative identity inspired by my initials. It's a simple way I reflect my approach — sharp, intentional, and personal.
   I enjoy designing intuitive, user-first interfaces, developing responsive websites, and bringing structure to ideas through thoughtful planning and collaboration.
 </p>
 
 <p className="text-gray-200 text-xl leading-relaxed">
   Always eager to learn, create, and grow — both as a designer, developer, and future leader.
 </p>
+<div className="mt-8 flex flex-wrap gap-4">
+  {/* Download CV Button */}
+<a
+  href="/amali-cv.pdf"  // Put your CV in public folder
+  download
+  className="px-6 py-3 border-3 border-[#FFD300] text-[#FFD300] rounded-full font-medium hover:bg-[#FFD300] hover:text-black transition duration-300"
+>
+  Download my CV
+</a>
+
+
+
+</div>
 
           </div>
 
@@ -118,9 +132,9 @@ export default function Aboutme() {
 
   {/* Profile image (centered inside outer ring) */}
   <div className="absolute top-1/2 left-1/2 w-80 h-80 rounded-full border-4 border-[#FFD300] overflow-hidden flex items-center justify-center -translate-x-1/2 -translate-y-1/2 bg-black z-10">
-    <div className="relative w-50 h-75 md:w-52 md:h-80">
+    <div className="relative w-50 h-75 md:w-55 md:h-90">
       <Image
-        src="/first.png"
+        src="/me.png"
         alt="Amali Perera's profile picture"
         fill
         style={{ objectFit: "cover" }}
