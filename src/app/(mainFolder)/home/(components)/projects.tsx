@@ -63,7 +63,7 @@ const projects = [
         responsive, and modern UI designed to highlight my work effectively.
       </>
     ),
-    image: "/portfolio.png",
+    image: "/port.png",
     link: "",
     github: "https://github.com/NavoAma-Perera/portfolio",
   },
