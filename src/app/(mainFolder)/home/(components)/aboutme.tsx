@@ -103,7 +103,7 @@ export default function Aboutme() {
 <div className="mt-8 flex flex-wrap gap-4">
   {/* Download CV Button */}
 <a
-  href="/amali-cv.pdf"  // Put your CV in public folder
+  href="/Amali-Perera-CV.pdf"  
   download
   className="px-6 py-3 border-3 border-[#FFD300] text-[#FFD300] rounded-full font-medium hover:bg-[#FFD300] hover:text-black transition duration-300"
 >
