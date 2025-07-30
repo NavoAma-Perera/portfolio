@@ -94,7 +94,7 @@ export default function Aboutme() {
 </p>
 
 <p className="text-gray-200 text-xl leading-relaxed">
-  I often go by <span className="text-[#FFD300] font-semibold">SNAP</span>, a creative identity inspired by my initials. It's a simple way I reflect my approach — sharp, intentional, and personal.
+  I often go by <span className="text-[#FFD300] font-semibold">SNAP</span>, a creative identity inspired by my initials. It is a simple way I reflect my approach — sharp, intentional, and personal.
   I enjoy designing intuitive, user-first interfaces, developing responsive websites, and bringing structure to ideas through thoughtful planning and collaboration.
 </p>
 
@@ -172,7 +172,7 @@ export default function Aboutme() {
       </h3>         
       <p className="text-gray-200 text-sm mb-2">2007–2018</p>           
       <p className="text-gray-200 text-sm font-medium mb-1">G.C.E Ordinary Level:</p>             
-      <p className="text-gray-200 text-sm">8A's 1B</p>             
+      <p className="text-gray-200 text-sm">8A 1B</p>             
     </div>     
   </motion.div>      
 

@@ -40,7 +40,7 @@ export default function Contact() {
       setStatus("error")
       setErrorMsg("Failed to send message. Please try again later.")
     }
-  } catch (_error) {
+  } catch {
     setStatus("error")
     setErrorMsg("An unexpected error occurred. Please try again later.")
   }
