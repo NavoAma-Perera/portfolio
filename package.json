@@ -58,6 +58,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/estree": "^1.0.8",
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -65,5 +67,8 @@
     "eslint-config-next": "15.2.2",
     "tailwindcss": "^4",
     "typescript": "5.8.3"
+  },
+  "tailwindcss": {
+    "oxide": "wasm"
   }
 }
