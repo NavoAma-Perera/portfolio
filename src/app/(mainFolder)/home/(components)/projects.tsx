@@ -84,7 +84,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="py-16 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
+    <section className="py-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
       {/* Section Heading */}
       <div className="flex items-center justify-center gap-3 text-white text-3xl sm:text-4xl font-bold tracking-tight mb-12">
         <SquareKanban className="w-8 h-8 text-white" />
@@ -158,10 +158,9 @@ export default function Projects() {
 
         {/* Controls Wrapper */}
         <div className="carousel-controls flex justify-center mt-6 space-x-4">
-          <CarouselPrevious className="carousel-previous text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-10 h-10 rounded-full flex items-center justify-center" />
-          <CarouselNext className="carousel-next text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-10 h-10 rounded-full flex items-center justify-center" />
+          <CarouselPrevious className="carousel-previous text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-10 h-10 rounded-full flex items-center justify-center hidden sm:flex" />
+          <CarouselNext className="carousel-next text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-10 h-10 rounded-full flex items-center justify-center hidden sm:flex" />
         </div>
-      </Carousel>
 
       {/* Custom Styles */}
       <style jsx>{`
@@ -179,27 +178,8 @@ export default function Projects() {
           top: 50%;
           transform: translateY(-50%);
         }
-
-        @media (max-width: 640px) {
-          /* On small screens, reposition controls below carousel */
-          .carousel-previous,
-          .carousel-next {
-            position: static;
-            transform: none;
-            width: 2.5rem;
-            height: 2.5rem;
-            font-size: 1.25rem;
-          }
-
-          .carousel-controls {
-            position: static;
-            margin-top: 1.5rem;
-            transform: none;
-            justify-content: center;
-            z-index: auto;
-          }
-        }
       `}</style>
+      </Carousel>
     </section>
   )
 }

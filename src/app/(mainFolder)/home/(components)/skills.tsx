@@ -1,6 +1,6 @@
 "use client"
 
-import { Lightbulb, Code2 } from "lucide-react"
+import { Lightbulb, Code2, Wrench } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
@@ -73,7 +73,7 @@ export default function SkillsSection() {
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              Skills & Technologies
+              Skills
             </h2>
           </div>
 
@@ -82,9 +82,7 @@ export default function SkillsSection() {
             <div className="hidden lg:flex relative w-[500px] lg:w-[600px] xl:w-[700px] h-[500px] lg:h-[600px] xl:h-[700px] items-center justify-center">
               <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-10">
                 <Lightbulb className="h-20 w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 text-yellow-400 drop-shadow-lg animate-pulse" />
-                <h2 className="text-3xl md:text-4xl font-bold text-white mt-4">
-                  Skills
-                </h2>
+                
               </div>
 
               {softSkills.map((skill, index) => (
@@ -168,7 +166,12 @@ export default function SkillsSection() {
         className="w-full py-10 md:py-24 lg:py-20 text-white flex flex-col items-center justify-center"
       >
         <div className="container px-4 md:px-6 text-center space-y-12">
-          <h2 className="text-3xl md:text-4xl font-bold">Technologies</h2>
+          <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
+            <Wrench className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              Technologies
+            </h2>
+          </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-10 justify-center items-center">
             {[
               { name: "HTML", icon: "/html.svg" },
@@ -188,16 +191,16 @@ export default function SkillsSection() {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className="flex flex-col items-center space-y-2 group transition-transform hover:scale-105"
               >
-                <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-700 group-hover:border-yellow-400 transition-all duration-300 ease-in-out">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-700 group-hover:border-yellow-400 transition-all duration-300 ease-in-out">
                   <Image
                     src={tool.icon}
                     alt={tool.name}
-                    width={56}
-                    height={56}
-                    className="object-contain"
+                    width={40}
+                    height={40}
+                    className="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   />
                 </div>
-                <span className="text-sm sm:text-base md:text-lg font-medium text-gray-200 group-hover:text-yellow-400 transition-colors">
+                <span className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-200 group-hover:text-yellow-400 transition-colors">
                   {tool.name}
                 </span>
               </motion.div>
