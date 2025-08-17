@@ -12,13 +12,14 @@ export default function Aboutme() {
   const [charIndex, setCharIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
 
-  const animatedWords = ["UI Designing", "Business Analysis", "Web development"]
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   useEffect(() => {
+      const animatedWords = ["UI Designing", "Business Analysis", "Web development"]
+
     if (!mounted) return
 
     let timeout: NodeJS.Timeout
@@ -48,7 +49,7 @@ export default function Aboutme() {
     }
 
     return () => clearTimeout(timeout)
-  }, [charIndex, isTyping, currentWordIndex, mounted, animatedWords])
+  }, [charIndex, isTyping, currentWordIndex, mounted])
 
   return (
     <motion.div
