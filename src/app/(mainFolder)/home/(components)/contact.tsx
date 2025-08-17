@@ -62,7 +62,7 @@ export default function Contact() {
       >
         <Send size={28} className="text-white" />
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-  Get in <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Touch</span> & 
+  Get in <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Touch</span>
 
 </h2>
       </motion.h2>

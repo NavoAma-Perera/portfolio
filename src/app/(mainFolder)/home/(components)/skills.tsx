@@ -39,15 +39,13 @@ export default function SkillsSection() {
   const isSkillInView = useInView(skillRef, { once: true, margin: "-100px" })
   const isToolsInView = useInView(toolsRef, { once: true, margin: "-100px" })
 
-  const [isPaused, setIsPaused] = useState(false)
-  const [currentTransform, setCurrentTransform] = useState(0)
   const [activeTech, setActiveTech] = useState<string | null>(null)
 
   const handleTechClick = (techName: string) => {
     if (activeTech === techName) {
-      setActiveTech(null) // Hide if already active
+      setActiveTech(null)
     } else {
-      setActiveTech(techName) // Show the clicked technology
+      setActiveTech(techName)
     }
   }
 
@@ -64,13 +62,18 @@ export default function SkillsSection() {
         <div className="container px-4 md:px-6 flex flex-col items-center justify-center space-y-10 sm:space-y-12 text-center">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
-<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-  What I  <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Bring to the </span>table
-</h2>          </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+              What I{" "}
+              <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+                Bring to the
+              </span>{" "}
+              table
+            </h2>
+          </div>
 
           <div className="block md:hidden w-full max-w-4xl">
             <div className="grid grid-cols-2 gap-4 sm:gap-6">
-              {softSkills.map((skill, index) => {
+              {softSkills.map((skill) => {
                 const IconComponent = skill.icon
                 return (
                   <motion.div
@@ -79,7 +82,7 @@ export default function SkillsSection() {
                     animate={isSkillInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                     transition={{
                       duration: 0.5,
-                      delay: 0.1 * index,
+                      delay: 0.1,
                       ease: "easeOut",
                     }}
                     className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-4 h-28 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/10"
@@ -94,34 +97,12 @@ export default function SkillsSection() {
 
           <div className="hidden md:block relative w-full max-w-6xl">
             <div className="overflow-hidden">
-              <div
-                ref={scrollContainerRef}
-                className={classnames(
-                  "flex transition-transform duration-500",
-                  !isPaused && "animate-scroll hover:pause-animation",
-                )}
-                style={{ transform: isPaused ? `translateX(${currentTransform}px)` : undefined }}
-              >
-                {/* First set of skills */}
-                {softSkills.map((skill, index) => {
+              <div className="flex transition-transform duration-500 animate-scroll hover:pause-animation">
+                {softSkills.concat(softSkills).map((skill, idx) => {
                   const IconComponent = skill.icon
                   return (
                     <div
-                      key={`first-${skill.name}`}
-                      className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-6 h-32 hover:border-yellow-400 flex-shrink-0 w-64 mx-3"
-                      title={skill.name}
-                    >
-                      <IconComponent className="h-8 w-8 text-yellow-400 mb-2" />
-                      <span className="text-base leading-tight">{skill.name}</span>
-                    </div>
-                  )
-                })}
-                {/* Duplicate set for seamless loop */}
-                {softSkills.map((skill, index) => {
-                  const IconComponent = skill.icon
-                  return (
-                    <div
-                      key={`second-${skill.name}`}
+                      key={`${idx}-${skill.name}`}
                       className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-6 h-32 hover:border-yellow-400 flex-shrink-0 w-64 mx-3"
                       title={skill.name}
                     >
@@ -148,8 +129,12 @@ export default function SkillsSection() {
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Wrench className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-  My <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Tech</span> Arsenal
-</h2>
+              My{" "}
+              <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+                Tech
+              </span>{" "}
+              Arsenal
+            </h2>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-10 justify-center items-center">
             {[
@@ -162,12 +147,12 @@ export default function SkillsSection() {
               { name: "MySQL", icon: "/mysql.svg" },
               { name: "Canva", icon: "/canva.svg" },
               { name: "Figma", icon: "/figma.svg" },
-            ].map((tool, index) => (
+            ].map((tool) => (
               <motion.div
                 key={tool.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isToolsInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
+                transition={{ duration: 0.5 }}
                 className="flex flex-col items-center group transition-transform hover:scale-105 relative"
                 onClick={() => handleTechClick(tool.name)}
               >
@@ -184,10 +169,12 @@ export default function SkillsSection() {
                       "absolute inset-0 bg-black/80 rounded-full flex items-center justify-center transition-opacity duration-300 ease-in-out",
                       "opacity-0 group-hover:opacity-100",
                       "md:opacity-0",
-                      activeTech === tool.name && "opacity-100",
+                      activeTech === tool.name && "opacity-100"
                     )}
                   >
-                    <span className="text-xs sm:text-sm font-medium text-yellow-400 text-center px-2">{tool.name}</span>
+                    <span className="text-xs sm:text-sm font-medium text-yellow-400 text-center px-2">
+                      {tool.name}
+                    </span>
                   </div>
                 </div>
               </motion.div>
