@@ -1,61 +1,53 @@
 "use client"
 
-import { Lightbulb, Code2, Wrench } from "lucide-react"
-import { useEffect, useState, useRef } from "react"
+import {
+  Code2,
+  Wrench,
+  MessageCircle,
+  Puzzle,
+  Users,
+  RefreshCw,
+  Clock,
+  Brain,
+  Ear,
+  Heart,
+  Palette,
+  Crown,
+} from "lucide-react"
+import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
+import classnames from "classnames"
 
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(" ")
-}
-
-// Move softSkills outside component to avoid useEffect warnings
-const softSkills: string[] = [
-  "Communication",
-  "Problem-solving",
-  "Teamwork & Collaboration",
-  "Adaptability",
-  "Time Management",
-  "Critical Thinking",
-  "Active Listening",
-  "Empathy",
-  "Creativity",
-  "Leadership",
+const softSkills = [
+  { name: "Communication", icon: MessageCircle },
+  { name: "Problem-solving", icon: Puzzle },
+  { name: "Teamwork & Collaboration", icon: Users },
+  { name: "Adaptability", icon: RefreshCw },
+  { name: "Time Management", icon: Clock },
+  { name: "Critical Thinking", icon: Brain },
+  { name: "Active Listening", icon: Ear },
+  { name: "Empathy", icon: Heart },
+  { name: "Creativity", icon: Palette },
+  { name: "Leadership", icon: Crown },
 ]
 
 export default function SkillsSection() {
-  const [visibleSkills, setVisibleSkills] = useState<string[]>([])
-  const [mounted, setMounted] = useState(false)
-  const [isClient, setIsClient] = useState(false)
   const skillRef = useRef<HTMLDivElement | null>(null)
   const toolsRef = useRef<HTMLDivElement | null>(null)
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
   const isSkillInView = useInView(skillRef, { once: true, margin: "-100px" })
   const isToolsInView = useInView(toolsRef, { once: true, margin: "-100px" })
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const [isPaused, setIsPaused] = useState(false)
+  const [currentTransform, setCurrentTransform] = useState(0)
+  const [activeTech, setActiveTech] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (isSkillInView && isClient) {
-      setMounted(true)
-      softSkills.forEach((skill, index) => {
-        setTimeout(() => {
-          setVisibleSkills((prev) => [...prev, skill])
-        }, 100 * index)
-      })
-    }
-  }, [isSkillInView, isClient])
-
-  const getSkillPosition = (index: number, total: number, radius: number) => {
-    const angleOffset = Math.PI / 2
-    const angle = (index / total) * 2 * Math.PI - angleOffset
-    const x = radius * Math.cos(angle)
-    const y = radius * Math.sin(angle)
-    return {
-      left: `calc(50% + ${x}px)`,
-      top: `calc(50% + ${y}px)`,
-      transform: `translate(-50%, -50%)`,
+  const handleTechClick = (techName: string) => {
+    if (activeTech === techName) {
+      setActiveTech(null) // Hide if already active
+    } else {
+      setActiveTech(techName) // Show the clicked technology
     }
   }
 
@@ -72,86 +64,73 @@ export default function SkillsSection() {
         <div className="container px-4 md:px-6 flex flex-col items-center justify-center space-y-10 sm:space-y-12 text-center">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              Skills
-            </h2>
+<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+  What I  <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Bring to the </span>table
+</h2>          </div>
+
+          <div className="block md:hidden w-full max-w-4xl">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6">
+              {softSkills.map((skill, index) => {
+                const IconComponent = skill.icon
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={isSkillInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.1 * index,
+                      ease: "easeOut",
+                    }}
+                    className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-4 h-28 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/10"
+                  >
+                    <IconComponent className="h-7 w-7 text-yellow-400 mb-2" />
+                    <span className="text-sm leading-tight">{skill.name}</span>
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
 
-          <div className="relative flex items-center justify-center w-full">
-            {/* Desktop Circular Layout */}
-            <div className="hidden lg:flex relative w-[500px] lg:w-[600px] xl:w-[700px] h-[500px] lg:h-[600px] xl:h-[700px] items-center justify-center">
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-10">
-                <Lightbulb className="h-20 w-20 md:h-24 md:w-24 lg:h-28 lg:w-28 text-yellow-400 drop-shadow-lg animate-pulse" />
-                
+          <div className="hidden md:block relative w-full max-w-6xl">
+            <div className="overflow-hidden">
+              <div
+                ref={scrollContainerRef}
+                className={classnames(
+                  "flex transition-transform duration-500",
+                  !isPaused && "animate-scroll hover:pause-animation",
+                )}
+                style={{ transform: isPaused ? `translateX(${currentTransform}px)` : undefined }}
+              >
+                {/* First set of skills */}
+                {softSkills.map((skill, index) => {
+                  const IconComponent = skill.icon
+                  return (
+                    <div
+                      key={`first-${skill.name}`}
+                      className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-6 h-32 hover:border-yellow-400 flex-shrink-0 w-64 mx-3"
+                      title={skill.name}
+                    >
+                      <IconComponent className="h-8 w-8 text-yellow-400 mb-2" />
+                      <span className="text-base leading-tight">{skill.name}</span>
+                    </div>
+                  )
+                })}
+                {/* Duplicate set for seamless loop */}
+                {softSkills.map((skill, index) => {
+                  const IconComponent = skill.icon
+                  return (
+                    <div
+                      key={`second-${skill.name}`}
+                      className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-6 h-32 hover:border-yellow-400 flex-shrink-0 w-64 mx-3"
+                      title={skill.name}
+                    >
+                      <IconComponent className="h-8 w-8 text-yellow-400 mb-2" />
+                      <span className="text-base leading-tight">{skill.name}</span>
+                    </div>
+                  )
+                })}
               </div>
-
-              {softSkills.map((skill, index) => (
-                <div
-                  key={skill}
-                  className={cn(
-                    "absolute flex items-center justify-center bg-gray-800 text-white rounded-full border-2 border-gray-600 shadow-md font-semibold text-center cursor-pointer transition-all duration-300 ease-in-out",
-                    "w-24 h-24 text-xs md:w-28 md:h-28 md:text-sm lg:w-32 lg:h-32 lg:text-base",
-                    "hover:bg-gray-700 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/20 hover:scale-105",
-                    isClient && mounted && visibleSkills.includes(skill)
-                      ? "opacity-100 animate-fadeInScale"
-                      : "opacity-0"
-                  )}
-                  style={
-                    isClient && mounted
-                      ? {
-                          ...getSkillPosition(index, softSkills.length, 220),
-                          animationDelay: `${0.1 * index}s`,
-                        }
-                      : { opacity: 0 }
-                  }
-                  title={skill}
-                >
-                  <span className="px-1 leading-tight">
-                    {skill.length > 12
-                      ? skill.split(" ").map((word, i) => (
-                          <span key={i} className="block">
-                            {word}
-                          </span>
-                        ))
-                      : skill}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile Grid Layout */}
-            <div className="grid grid-cols-2 gap-4 lg:hidden mt-10 ml-20">
-              {softSkills.map((skill, index) => (
-                <div
-                  key={skill}
-                  className={cn(
-                    "flex items-center justify-center bg-gray-800 text-white rounded-full border-2 border-gray-600 shadow font-semibold text-center cursor-pointer transition-all duration-300 ease-in-out",
-                    "w-24 h-24 text-[10px] sm:w-28 sm:h-28 sm:text-xs",
-                    "hover:bg-gray-700 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/20 hover:scale-105",
-                    isClient && mounted && visibleSkills.includes(skill)
-                      ? "opacity-100 animate-fadeInScale"
-                      : "opacity-0"
-                  )}
-                  style={{
-                    animationDelay: `${0.1 * index}s`,
-                    opacity:
-                      isClient && mounted && visibleSkills.includes(skill)
-                        ? 1
-                        : 0,
-                  }}
-                  title={skill}
-                >
-                  <span className="px-1 leading-tight">
-                    {skill.length > 12
-                      ? skill.split(" ").map((word, i) => (
-                          <span key={i} className="block">
-                            {word}
-                          </span>
-                        ))
-                      : skill}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
         </div>
@@ -168,9 +147,9 @@ export default function SkillsSection() {
         <div className="container px-4 md:px-6 text-center space-y-12">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Wrench className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              Technologies
-            </h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+  My <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Tech</span> Arsenal
+</h2>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-10 justify-center items-center">
             {[
@@ -189,43 +168,33 @@ export default function SkillsSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isToolsInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="flex flex-col items-center space-y-2 group transition-transform hover:scale-105"
+                className="flex flex-col items-center group transition-transform hover:scale-105 relative"
+                onClick={() => handleTechClick(tool.name)}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-700 group-hover:border-yellow-400 transition-all duration-300 ease-in-out">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-700 group-hover:border-yellow-400 transition-all duration-300 ease-in-out relative cursor-pointer">
                   <Image
-                    src={tool.icon}
+                    src={tool.icon || "/placeholder.svg"}
                     alt={tool.name}
                     width={40}
                     height={40}
                     className="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   />
+                  <div
+                    className={classnames(
+                      "absolute inset-0 bg-black/80 rounded-full flex items-center justify-center transition-opacity duration-300 ease-in-out",
+                      "opacity-0 group-hover:opacity-100",
+                      "md:opacity-0",
+                      activeTech === tool.name && "opacity-100",
+                    )}
+                  >
+                    <span className="text-xs sm:text-sm font-medium text-yellow-400 text-center px-2">{tool.name}</span>
+                  </div>
                 </div>
-                <span className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-200 group-hover:text-yellow-400 transition-colors">
-                  {tool.name}
-                </span>
               </motion.div>
             ))}
           </div>
         </div>
       </motion.section>
-
-      {/* Custom styles */}
-      <style jsx>{`
-        @keyframes fadeInScale {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) translate(-50%, -50%);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translate(-50%, -50%);
-          }
-        }
-
-        .animate-fadeInScale {
-          animation: fadeInScale 0.5s ease-out forwards;
-        }
-      `}</style>
     </div>
   )
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState, useEffect } from "react"
-import { Paintbrush, ClipboardList, BookOpenText,Code2 } from "lucide-react"
+import { Paintbrush, ClipboardList, BookOpenText, Code2 } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Aboutme() {
@@ -10,17 +10,24 @@ export default function Aboutme() {
   const [displayedText, setDisplayedText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
   const [charIndex, setCharIndex] = useState(0)
+  const [mounted, setMounted] = useState(false)
+
+  const animatedWords = ["UI Designing", "Business Analysis", "Web development"]
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout
-      const animatedWords = ["UI Designing", "Project Management","Web development"]
+    setMounted(true)
+  }, [])
 
+  useEffect(() => {
+    if (!mounted) return
+
+    let timeout: NodeJS.Timeout
     const currentWord = animatedWords[currentWordIndex]
 
     if (isTyping) {
       if (charIndex < currentWord.length) {
         timeout = setTimeout(() => {
-          setDisplayedText((prev) => prev + currentWord[charIndex])
+          setDisplayedText(currentWord.slice(0, charIndex + 1))
           setCharIndex((prev) => prev + 1)
         }, 100)
       } else {
@@ -31,7 +38,7 @@ export default function Aboutme() {
     } else {
       if (charIndex > 0) {
         timeout = setTimeout(() => {
-          setDisplayedText((prev) => prev.slice(0, -1))
+          setDisplayedText(currentWord.slice(0, charIndex - 1))
           setCharIndex((prev) => prev - 1)
         }, 50)
       } else {
@@ -41,7 +48,7 @@ export default function Aboutme() {
     }
 
     return () => clearTimeout(timeout)
-  }, [charIndex, isTyping, currentWordIndex])
+  }, [charIndex, isTyping, currentWordIndex, mounted, animatedWords])
 
   return (
     <motion.div
@@ -58,158 +65,312 @@ export default function Aboutme() {
               <span className="text-white">Hi , I am </span>
               <span className="text-[#FFD300]">Amali Perera</span>
             </h1>
-           <h2 className="text-2xl md:text-2xl lg:text-3xl font-semibold text-white min-h-[3rem] flex flex-wrap items-start">
-  <span className="whitespace-nowrap mr-2">Enthusiast in</span>
-  <span
-    className="inline-flex items-baseline h-[1.5em] w-[320px] sm:w-[360px] md:w-[400px] relative overflow-hidden"
-  >
-    <span
-      className="text-white whitespace-nowrap"
-      style={{ filter: "drop-shadow(0 4px 8px rgba(255, 211, 0, 0.3))" }}
-    >
-      {displayedText}
-    </span>
-    {displayedText.length > 0 && (
-      <span
-        className="absolute pointer-events-none z-10"
-        style={{
-          left: `${displayedText.length * 0.55}em`,
-          transition: "left 0.05s ease-out",
-        }}
-      >
-        {currentWordIndex === 0 && <Paintbrush className="text-white w-4 h-4" />}
-{currentWordIndex === 1 && <ClipboardList className="text-white w-4 h-4" />}
-{currentWordIndex === 2 && <Code2 className="text-white w-4 h-4" />}
+            <h2 className="text-2xl md:text-2xl lg:text-3xl font-semibold text-white min-h-[3rem] flex flex-wrap items-start">
+              <span className="whitespace-nowrap mr-2">Enthusiast in</span>
+              <span className="inline-flex items-baseline h-[1.5em] w-[320px] sm:w-[360px] md:w-[400px] relative overflow-hidden">
+                <span
+                  className="bg-gradient-to-r from-[#FFD300] via-white to-[#FFD300] bg-clip-text text-transparent whitespace-nowrap font-semibold"
+                  style={{ filter: "drop-shadow(0 4px 8px rgba(255, 211, 0, 0.3))" }}
+                >
+                  {mounted ? displayedText : "UI Designing"}
+                </span>
+                {mounted && displayedText && (
+                  <span
+                    className="absolute pointer-events-none z-10"
+                    style={{
+                      left: `${displayedText.length * 0.55}em`,
+                      transition: "left 0.05s ease-out",
+                    }}
+                  >
+                    {currentWordIndex === 0 && <Paintbrush className="text-white w-4 h-4" />}
+                    {currentWordIndex === 1 && <ClipboardList className="text-white w-4 h-4" />}
+                    {currentWordIndex === 2 && <Code2 className="text-white w-4 h-4" />}
+                  </span>
+                )}
+              </span>
+            </h2>
 
-      </span>
-    )}
-  </span>
-</h2>
+            <p className="text-gray-200 text-xl leading-relaxed">
+              I&apos;m an undergraduate passionate about crafting seamless user experiences and turning ideas into
+              impactful digital solutions. My interests span <span className="font-bold text-white">UI design</span>,{" "}
+              <span className="font-bold text-white">web development</span>, and{" "}
+              <span className="font-bold text-white">business analysis</span> — where creativity meets strategy.
+            </p>
 
-<p className="text-gray-200 text-xl leading-relaxed">
-  I&apos;m an undergraduate passionate about crafting seamless user experiences and turning ideas into impactful digital solutions. My interests lie at the intersection of{" "}
-  <span className="font-bold text-white">UI design</span>,{" "}
-  <span className="font-bold text-white">web development</span>, and{" "}
-  <span className="font-bold text-white">project management</span> — where creativity meets strategy.
-</p>
+            <p className="text-gray-200 text-xl leading-relaxed">
+              I go by <span className="text-[#FFD300] font-semibold">SNAP</span>, reflecting my approach — sharp,
+              intentional, and personal. I enjoy designing intuitive interfaces, developing responsive websites, and
+              bringing structure to ideas through thoughtful collaboration. Always eager to learn, create, and grow as a
+              designer, developer, and future leader.
+            </p>
 
-<p className="text-gray-200 text-xl leading-relaxed">
-  I often go by <span className="text-[#FFD300] font-semibold">SNAP</span>, a creative identity inspired by my initials. It is a simple way I reflect my approach — sharp, intentional, and personal.
-  I enjoy designing intuitive, user-first interfaces, developing responsive websites, and bringing structure to ideas through thoughtful planning and collaboration.
-</p>
-
-<p className="text-gray-200 text-xl leading-relaxed">
-  Always eager to learn, create, and grow — both as a designer, developer, and future leader.
-</p>
-<div className="mt-8 flex flex-wrap gap-4">
-  {/* Download CV Button */}
-<a
-  href="/Amali-Perera-CV.pdf"  
-  download
-  className="px-6 py-3 border-3 border-[#FFD300] text-[#FFD300] rounded-full font-medium hover:bg-[#FFD300] hover:text-black transition duration-300"
->
-  Download my CV
-</a>
-
-
-
-</div>
-
+            <div className="mt-8 flex flex-wrap gap-4">
+              {/* Download CV Button */}
+              <a
+                href="/Amali-Perera-CV.pdf"
+                download
+                className="px-6 py-3 border-3 border-[#FFD300] text-[#FFD300] rounded-full font-medium hover:bg-[#FFD300] hover:text-black transition duration-300"
+              >
+                Download my CV
+              </a>
+            </div>
           </div>
 
           {/* Right Column: Image */}
-<div className="order-first md:order-last relative w-96 h-96 mx-auto md:mx-0 lg:ml-30 flex justify-center md:justify-end">
-  {/* Outer ring */}
-  <div className="absolute inset-0 rounded-full border-4 border-[#FFD300]/60 z-0"></div>
+          <div className="order-first md:order-last relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 mx-auto md:mx-0 lg:ml-30 flex justify-center md:justify-end">
+            {/* Floating Bubbles */}
+            <div className="absolute inset-0 pointer-events-none">
+              {/* Large bubbles - positioned outside container bounds */}
+              <motion.div
+                className="absolute w-16 h-16 bg-[#FFD300]/50 rounded-full"
+                style={{ top: "-10%", left: "-15%" }}
+                animate={{
+                  y: [0, -20, 0],
+                  x: [0, 5, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="absolute w-12 h-12 bg-white/50 rounded-full"
+                style={{ top: "85%", right: "-10%" }}
+                animate={{
+                  y: [0, -15, 0],
+                  x: [0, -3, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+              />
+              <motion.div
+                className="absolute w-20 h-20 bg-white/50 rounded-full"
+                style={{ top: "100%", left: "-8%" }}
+                animate={{
+                  y: [0, -25, 0],
+                  x: [0, 8, 0],
+                  scale: [1, 1.3, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+              />
 
-  {/* Top dot (0°) */}
-  <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md z-10" />
+              {/* Medium bubbles - positioned with more spacing */}
+              <motion.div
+                className="absolute w-10 h-10 bg-[#FFD300]/50 rounded-full"
+                style={{ top: "15%", right: "-20%" }}
+                animate={{
+                  y: [0, -12, 0],
+                  x: [0, -2, 0],
+                  opacity: [0.4, 0.7, 0.4],
+                }}
+                transition={{
+                  duration: 3.5,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 0.8,
+                }}
+              />
+              <motion.div
+                className="absolute w-14 h-14 bg-white/50 rounded-full"
+                style={{ top: "-8%", right: "15%" }}
+                animate={{
+                  y: [0, -18, 0],
+                  x: [0, 4, 0],
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{
+                  duration: 4.5,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 1.5,
+                }}
+              />
 
-  {/* Bottom-right dot (120°) */}
-  <div className="absolute right-[14%] bottom-[14%] transform translate-x-1/2 translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md z-10" />
+              {/* Small bubbles - positioned further from center */}
+             
+             
+              <motion.div
+                className="absolute w-8 h-8 bg-white/50 rounded-full"
+                style={{ top: "-5%", left: "10%" }}
+                animate={{
+                  y: [0, -10, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: 2,
+                }}
+              />
+            </div>
 
-  {/* Bottom-left dot (240°) */}
-  <div className="absolute left-[14%] bottom-[14%] transform -translate-x-1/2 translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md z-10" />
-
-  {/* Profile image (centered inside outer ring) */}
-  <div className="absolute top-1/2 left-1/2 w-80 h-80 rounded-full border-4 border-[#FFD300] overflow-hidden flex items-center justify-center -translate-x-1/2 -translate-y-1/2 bg-black z-10">
-    <div className="relative w-50 h-75 md:w-55 md:h-90">
-      <Image
-        src="/me.png"
-        alt="Amali Perera's profile picture"
-        fill
-        style={{ objectFit: "cover" }}
-        className="object-cover"
-      />
-    </div>
-  </div>
-</div>
-
-          
+            {/* Profile image with floating animation */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full overflow-hidden flex items-center justify-center -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-gray-800 to-gray-900 border-4 border-[#FFD300]/50"
+              animate={{
+                y: [0, -10, 0],
+                rotate: [0, 1, -1, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "easeInOut",
+              }}
+            >
+              <div className="relative w-50 h-75 md:w-55 md:h-90">
+                <Image
+                  src="/me.png"
+                  alt="Amali Perera's profile picture"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
-     {/* Education Section */}
-<section className="py-12 md:py-16 lg:py-12 max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-6">
-  {/* Heading and Icon - centered */}
-        <div className="flex items-center justify-center gap-3 text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
-    <BookOpenText className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white " />
-    <h2 className="text-3xl md:text-4xl font-bold text-white">Education</h2>
-  </div>
+      {/* Education Section */}
+      <section className="py-12 md:py-16 lg:py-12 max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-6">
+        {/* Heading and Icon - centered */}
+        <div className="flex items-center justify-center gap-3 text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mb-16">
+          <BookOpenText className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+ <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+  My <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Education</span>
+</h2>        </div>
 
-  {/* Cards container */}
- <div className="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0 justify-center items-center mt-8">     
-  <motion.div       
-    className="flex justify-center"       
-    initial={{ opacity: 0, y: 50 }}        
-    transition={{ duration: 0.6 }}       
-    whileInView={{ opacity: 1, y: 0 }}             
-    viewport={{ once: true }}     
-  >       
-    <div className="w-80 h-80 bg-transparent border-4 border-gray-700 rounded-full flex flex-col justify-center items-center text-center hover:border-[#FFD300] transition-all duration-300  p-8 shadow-lg">         
-      <h3 className="text-lg md:text-xl text-[#FFD300] font-semibold mb-3">             
-        Christ King College Pannipitiya           
-      </h3>         
-      <p className="text-gray-200 text-sm mb-2">2007–2018</p>           
-      <p className="text-gray-200 text-sm font-medium mb-1">G.C.E Ordinary Level:</p>             
-      <p className="text-gray-200 text-sm">8A 1B</p>             
-    </div>     
-  </motion.div>      
+        {/* Timeline Container */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Timeline Line */}
+          <motion.div
+            className="absolute left-1/2 -translate-x-0.5 top-0 w-1 bg-gradient-to-b from-[#FFD300] to-transparent"
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-100px" }}
+          />
 
-  <motion.div       
-    className="flex justify-center"       
-    initial={{ opacity: 0, y: 50 }}       
-    whileInView={{ opacity: 1, y: 0 }}       
-    transition={{ duration: 0.6, delay: 0.2 }}       
-    viewport={{ once: true }}     
-  >       
-    <div className="w-80 h-80 bg-transparent border-4 border-gray-700 rounded-full flex flex-col justify-center hover:border-[#FFD300] transition-all duration-300  items-center text-center p-8 shadow-lg">         
-      <h3 className="text-lg md:text-xl text-[#FFD300] font-semibold mb-3">             
-        Rajasinghe Central College Hanwella           
-      </h3>         
-      <p className="text-gray-200 text-sm mb-2">2018–2020</p>           
-      <p className="text-gray-200 text-sm font-medium mb-1">G.C.E Advanced Level:</p>             
-      <p className="text-gray-200 text-sm">Biology (A) Chemistry (B) Physics (B)</p>               
-      <p className="text-gray-200 text-sm">Z score: 1.8062</p>             
-    </div>     
-  </motion.div>      
+          {/* Timeline Items */}
+          <div className="space-y-16 sm:space-y-20">
+            {/* First Education Item */}
+            <motion.div
+              className="relative flex justify-center md:justify-start"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {/* Timeline Dot */}
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 top-6 w-4 h-4 bg-[#FFD300] rounded-full border-4 border-gray-900 z-10"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                viewport={{ once: true }}
+              />
+<div className="w-full max-w-sm sm:max-w-md md:max-w-lg md:w-5/12 md:pr-8 md:text-right pt-2">
+                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 hover:border-[#FFD300]/70 transition-all duration-300 shadow-xl shadow-[#FFD300]/20">
+                  <h3 className="text-lg sm:text-xl font-semibold text-[#FFD300] mb-2">University of Moratuwa</h3>
+                  <p className="text-gray-400 text-sm mb-3">2023 – Present</p>
+                  <div className="space-y-1">
+                    <p className="text-gray-300 font-medium">BSc. (Hons) Information Technology</p>
+                    <p className="text-gray-200">Undergraduate</p>
+                  </div>
+                
+                </div>
+              </div>
+              {/* Content Card */}
+             
+            </motion.div>
 
-  <motion.div       
-    className="flex justify-center"       
-    initial={{ opacity: 0, y: 50 }}       
-    whileInView={{ opacity: 1, y: 0 }}              
-    transition={{ duration: 0.6, delay: 0.4 }}       
-    viewport={{ once: true }}     
-  >       
-    <div className="w-80 h-80 bg-transparent border-4 border-gray-700 rounded-full flex flex-col justify-center hover:border-[#FFD300] transition-all duration-300  items-center text-center p-8 shadow-lg">         
-      <h3 className="text-lg md:text-xl text-[#FFD300] font-semibold mb-3">University of Moratuwa</h3>         
-      <p className="text-gray-200 text-sm mb-2">2023 (Present)</p>           
-      <p className="text-gray-200 text-sm">BSc. (Hons) Information Technology (Undergraduate)</p>         
-    </div>     
-  </motion.div>   
-</div>
-</section>
+            {/* Second Education Item */}
+            <motion.div
+              className="relative flex justify-center md:justify-end"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {/* Timeline Dot */}
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 top-6 w-4 h-4 bg-[#FFD300] rounded-full border-4 border-gray-900 z-10"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.6 }}
+                viewport={{ once: true }}
+              />
 
+              {/* Content Card */}
+              <div className="w-full max-w-sm sm:max-w-md md:max-w-lg md:w-5/12 md:pl-8 pt-2">
+                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 hover:border-[#FFD300]/70 transition-all duration-300 shadow-xl shadow-[#FFD300]/20">
+                  <h3 className="text-lg sm:text-xl font-semibold text-[#FFD300] mb-2">
+                    Rajasinghe Central College Hanwella
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-3">2018–2020</p>
+                  <div className="space-y-1">
+                    <p className="text-gray-300 font-medium">G.C.E Advanced Level</p>
+                    <p className="text-gray-200">Biology (A) Chemistry (B) Physics (B)</p>
+                    <p className="text-gray-200">Z Score: 1.8062</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Third Education Item */}
+            <motion.div
+              className="relative flex justify-center md:justify-start"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true, margin: "-50px" }}
+            >
+              {/* Timeline Dot - Current/Active */}
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 top-6 w-4 h-4 bg-[#FFD300] rounded-full border-4 border-gray-900 z-10"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.8 }}
+                viewport={{ once: true }}
+              >
+                {/* Pulsing effect for current education */}
+                <motion.div
+                  className="absolute inset-0 bg-[#FFD300] rounded-full"
+                  animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
+                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                />
+              </motion.div>
+
+              {/* Content Card */}
+              <div className="w-full max-w-sm sm:max-w-md md:max-w-lg md:w-5/12 md:pr-8 md:text-right pt-2">
+                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 hover:border-[#FFD300]/70 transition-all duration-300 shadow-xl shadow-[#FFD300]/20">
+                  <h3 className="text-lg sm:text-xl font-semibold text-[#FFD300] mb-2">
+                    Christ King College Pannipitiya
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-3">2007–2018</p>
+                  <div className="space-y-1">
+                    <p className="text-gray-300 font-medium">G.C.E Ordinary Level</p>
+                    <p className="text-gray-200">8A 1B</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </motion.div>
   )
 }

@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Mail, Send, User } from "lucide-react"
 import { FaLinkedin, FaGithub, FaBehance } from "react-icons/fa"
@@ -20,32 +22,31 @@ export default function Contact() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setStatus("sending")
-  setErrorMsg("")
+    e.preventDefault()
+    setStatus("sending")
+    setErrorMsg("")
 
-  try {
-    const res = await fetch("https://formspree.io/f/mwpqbjnj", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    try {
+      const res = await fetch("https://formspree.io/f/mwpqbjnj", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    if (res.ok) {
-      setStatus("success")
-      setFormData({ name: "", email: "", message: "" })
-    } else {
+      if (res.ok) {
+        setStatus("success")
+        setFormData({ name: "", email: "", message: "" })
+      } else {
+        setStatus("error")
+        setErrorMsg("Failed to send message. Please try again later.")
+      }
+    } catch {
       setStatus("error")
-      setErrorMsg("Failed to send message. Please try again later.")
+      setErrorMsg("An unexpected error occurred. Please try again later.")
     }
-  } catch {
-    setStatus("error")
-    setErrorMsg("An unexpected error occurred. Please try again later.")
   }
-}
-
 
   return (
     <section
@@ -60,19 +61,29 @@ export default function Contact() {
         className="text-3xl md:text-4xl font-bold mb-12 text-center flex items-center gap-3"
       >
         <Send size={28} className="text-white" />
-        Contact Me
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+  Let's <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Connect</span> & 
+ <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent"> Create</span>
+
+</h2>
       </motion.h2>
 
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl"
       >
-        {/* LEFT SIDE - Contact Icons */}
-        <div className="space-y-6 flex flex-col justify-center items-center md:items-start">
-          <p className="text-xl mb-4">Feel free to reach out or connect with me:</p>
+        {/* LEFT SIDE - Contact Icons with slide-in from left */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="space-y-6 flex flex-col justify-center items-center md:items-start"
+        >
+          <p className="text-xl mb-4 text-white">Feel free to reach out or connect with me:</p>
 
           <div className="flex gap-6 flex-wrap justify-center md:justify-start">
             <a
@@ -115,10 +126,16 @@ export default function Contact() {
               <FaGithub size={24} />
             </a>
           </div>
-        </div>
+        </motion.div>
 
-        {/* RIGHT SIDE - Contact Form as Card */}
-        <div className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full md:self-start mt-4 md:mt-0">
+        {/* RIGHT SIDE - Contact Form with slide-in from right */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="bg-gray-800 p-8 rounded-2xl shadow-xl w-full md:self-start mt-4 md:mt-0"
+        >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex items-center gap-3">
               <User size={20} />
@@ -161,15 +178,9 @@ export default function Contact() {
               />
             </div>
 
-            {status === "sending" && (
-              <p className="text-yellow-400 font-medium">Sending message...</p>
-            )}
-            {status === "success" && (
-              <p className="text-white font-medium">Message sent successfully! Thank you.</p>
-            )}
-            {status === "error" && (
-              <p className="text-red-500 font-medium">{errorMsg}</p>
-            )}
+            {status === "sending" && <p className="text-yellow-400 font-medium">Sending message...</p>}
+            {status === "success" && <p className="text-white font-medium">Message sent successfully! Thank you.</p>}
+            {status === "error" && <p className="text-red-500 font-medium">{errorMsg}</p>}
 
             <button
               type="submit"
@@ -179,7 +190,7 @@ export default function Contact() {
               <Send size={18} /> Send Message
             </button>
           </form>
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   )
