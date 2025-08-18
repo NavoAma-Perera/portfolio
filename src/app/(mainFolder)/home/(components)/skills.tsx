@@ -35,7 +35,6 @@ const softSkills = [
 export default function SkillsSection() {
   const skillRef = useRef<HTMLDivElement | null>(null)
   const toolsRef = useRef<HTMLDivElement | null>(null)
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null)
   const isSkillInView = useInView(skillRef, { once: true, margin: "-100px" })
   const isToolsInView = useInView(toolsRef, { once: true, margin: "-100px" })
 
@@ -62,12 +61,12 @@ export default function SkillsSection() {
         <div className="container px-4 md:px-6 flex flex-col items-center justify-center space-y-10 sm:space-y-12 text-center">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              What I{" "}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              <span className="text-white">What I </span>
               <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
                 Bring to the
-              </span>{" "}
-              table
+              </span>
+              <span className="text-white"> table</span>
             </h2>
           </div>
 
@@ -128,12 +127,12 @@ export default function SkillsSection() {
         <div className="container px-4 md:px-6 text-center space-y-12">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
             <Wrench className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              My{" "}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              <span className="text-white">My </span>
               <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
                 Tech
-              </span>{" "}
-              Arsenal
+              </span>
+              <span className="text-white"> Arsenal</span>
             </h2>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-10 justify-center items-center">
