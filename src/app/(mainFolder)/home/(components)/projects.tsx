@@ -43,6 +43,15 @@ const projects = [
     github: "https://github.com/NavoAma-Perera/portfolio",
   },
   {
+    title: "Accessible Sri Lanka",
+    description:
+      "A group project built to help people with disabilities and caregivers find accessible, convenient locations across Sri Lanka. Users can explore places, review accessibility features, and contribute new entries, promoting an inclusive and navigable environment.",
+    tech: ["React", "Vue", "Mantine UI", "Ballerina"],
+    image: "/access.png",
+    link: "https://www.youtube.com/watch?feature=shared&v=4Xwdvp-wJzA",
+    github: "https://github.com/HKSahanTharaka/iwb25-354-jrsharks",
+  },
+  {
     title: "UI/UX Work",
     description:
       "Explore my full range of UI and UX design projects on Behance, showcasing wireframes, prototypes, and visual design work created with Canva, Figma, and other tools.",
@@ -56,11 +65,10 @@ const projects = [
 export default function Projects() {
   return (
     <section className="py-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
-      {/* Section Heading */}
       <div className="flex items-center justify-center gap-3 text-white text-3xl sm:text-4xl font-bold tracking-tight mb-12">
         <SquareKanban className="w-8 h-8 text-white" />
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-          What<span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent"> I have Built</span>
+          What<span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent"> I have Built</span>
         </h2>
       </div>
 
@@ -70,77 +78,78 @@ export default function Projects() {
           {projects.map((project, index) => (
             <CarouselItem key={index} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
               <motion.div
-                className="bg-gray-900 rounded-xl border border-gray-700 hover:border-[#FFD300] p-5 shadow-lg h-full"
+                className="backdrop-blur-xl bg-white/5 rounded-xl border border-white/20 hover:border-cyan-400/70 hover:bg-white/10 p-5 shadow-2xl h-full transition-all duration-300 relative"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                {/* Image */}
-                <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
-                  <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
-                </div>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+                
+                <div className="relative z-10">
+                
+                  <div className="relative w-full h-48 rounded-lg overflow-hidden mb-4">
+                    <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+                  </div>
 
-                {/* Title */}
-                <h3 className="text-xl text-[#FFD300] font-semibold mb-2">{project.title}</h3>
+                  <h3 className="text-xl text-cyan-400 font-semibold mb-2">{project.title}</h3>
 
-                {/* Description */}
-                <p className="text-gray-300 text-md mb-2">{project.description}</p>
+                  <p className="text-gray-300 text-md mb-2">{project.description}</p>
 
-                {/* Tech Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech?.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="border border-white text-white text-xs font-semibold px-2 py-2 rounded-lg transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech?.map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="backdrop-blur-md bg-white/10 border border-white/30 text-white text-xs font-semibold px-2 py-2 rounded-lg hover:border-cyan-400/50 transition-colors"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
 
-                {/* Links */}
-                <div className="flex gap-3">
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-[#FFD300]/60 text-white text-sm font-medium rounded-lg hover:bg-yellow-400 transition-colors duration-200"
-                    >
-                      {project.title.includes("UI/UX Work") ? "View Behance" : "Live Demo"}
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 bg-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-600 border border-gray-600 hover:border-gray-500 transition-colors duration-200"
-                    >
-                      GitHub
-                    </a>
-                  )}
+                  <div className="flex gap-3">
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-4 py-2 bg-cyan-400/60 text-white text-sm font-medium rounded-lg hover:bg-cyan-400 transition-colors duration-200"
+                      >
+                        {project.title.includes("UI/UX Work") ? "View Behance" : "Live Demo"}
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-4 py-2 backdrop-blur-md bg-white/10 text-white text-sm font-medium rounded-lg hover:bg-white/20 border border-white/30 hover:border-cyan-400/50 transition-colors duration-200"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             </CarouselItem>
           ))}
         </CarouselContent>
 
-        {/* Controls Wrapper */}
+      
         <div className="carousel-controls">
-          {/* Desktop arrows (on sides) */}
-          <CarouselPrevious className="carousel-previous text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-10 h-10 rounded-full items-center justify-center hidden md:flex" />
-          <CarouselNext className="carousel-next text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-10 h-10 rounded-full items-center justify-center hidden md:flex" />
+      
+          <CarouselPrevious className="carousel-previous text-white backdrop-blur-md bg-white/10 hover:bg-white/20 hover:text-cyan-400 hover:border-cyan-400/50 border border-white/30 w-10 h-10 rounded-full items-center justify-center hidden md:flex transition-all duration-300" />
+          <CarouselNext className="carousel-next text-white backdrop-blur-md bg-white/10 hover:bg-white/20 hover:text-cyan-400 hover:border-cyan-400/50 border border-white/30 w-10 h-10 rounded-full items-center justify-center hidden md:flex transition-all duration-300" />
 
-          {/* Mobile arrows (below cards) */}
+         
           <div className="flex justify-center mt-3 space-x-4 md:hidden">
-            <CarouselPrevious className="text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-12 h-12 rounded-full flex items-center justify-center relative left-0 top-0 transform-none" />
-            <CarouselNext className="text-white bg-gray-800 hover:bg-gray-700 hover:text-[#FFD300] w-12 h-12 rounded-full flex items-center justify-center relative right-0 top-0 transform-none" />
+            <CarouselPrevious className="text-white backdrop-blur-md bg-white/10 hover:bg-white/20 hover:text-cyan-400 hover:border-cyan-400/50 border border-white/30 w-12 h-12 rounded-full flex items-center justify-center relative left-0 top-0 transform-none transition-all duration-300" />
+            <CarouselNext className="text-white backdrop-blur-md bg-white/10 hover:bg-white/20 hover:text-cyan-400 hover:border-cyan-400/50 border border-white/30 w-12 h-12 rounded-full flex items-center justify-center relative right-0 top-0 transform-none transition-all duration-300" />
           </div>
         </div>
 
-        {/* Custom Styles */}
+     
         <style jsx>{`
           /* Desktop: arrows on sides */
           @media (min-width: 768px) {

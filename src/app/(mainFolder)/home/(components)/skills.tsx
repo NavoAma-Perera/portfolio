@@ -17,7 +17,6 @@ import {
 import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
-import classnames from "classnames"
 
 const softSkills = [
   { name: "Communication", icon: MessageCircle },
@@ -50,7 +49,7 @@ export default function SkillsSection() {
 
   return (
     <div className="min-h-screen py-12">
-      {/* Skills Section */}
+     
       <motion.section
         ref={skillRef}
         initial={{ opacity: 0, y: 100 }}
@@ -63,7 +62,7 @@ export default function SkillsSection() {
             <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
               <span className="text-white">What I </span>
-              <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent">
                 Bring to the
               </span>
               <span className="text-white"> table</span>
@@ -84,9 +83,9 @@ export default function SkillsSection() {
                       delay: 0.1,
                       ease: "easeOut",
                     }}
-                    className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-4 h-28 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/10"
+                    className="flex flex-col items-center justify-center backdrop-blur-xl bg-white/5 text-white rounded-xl border border-white/20 shadow-xl font-semibold text-center transition-all duration-300 ease-in-out p-4 h-28 hover:border-cyan-400/70 hover:bg-white/10"
                   >
-                    <IconComponent className="h-7 w-7 text-yellow-400 mb-2" />
+                    <IconComponent className="h-7 w-7 text-cyan-400 mb-2" />
                     <span className="text-sm leading-tight">{skill.name}</span>
                   </motion.div>
                 )
@@ -102,10 +101,10 @@ export default function SkillsSection() {
                   return (
                     <div
                       key={`${idx}-${skill.name}`}
-                      className="flex flex-col items-center justify-center bg-gray-800 text-white rounded-xl border-2 border-gray-600 shadow-lg font-semibold text-center transition-all duration-300 ease-in-out p-6 h-32 hover:border-yellow-400 flex-shrink-0 w-64 mx-3"
+                      className="flex flex-col items-center justify-center backdrop-blur-xl bg-white/5 text-white rounded-xl border border-white/20 shadow-xl font-semibold text-center transition-all duration-300 ease-in-out p-6 h-32 hover:border-cyan-400/70 hover:bg-white/10 flex-shrink-0 w-64 mx-3"
                       title={skill.name}
                     >
-                      <IconComponent className="h-8 w-8 text-yellow-400 mb-2" />
+                      <IconComponent className="h-8 w-8 text-cyan-400 mb-2" />
                       <span className="text-base leading-tight">{skill.name}</span>
                     </div>
                   )
@@ -116,7 +115,7 @@ export default function SkillsSection() {
         </div>
       </motion.section>
 
-      {/* Tools Section */}
+   
       <motion.section
         ref={toolsRef}
         initial={{ opacity: 0, y: 100 }}
@@ -129,52 +128,92 @@ export default function SkillsSection() {
             <Wrench className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
               <span className="text-white">My </span>
-              <span className="bg-gradient-to-r from-[#FFD300] via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent">
                 Tech
               </span>
               <span className="text-white"> Arsenal</span>
             </h2>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-6 md:gap-10 justify-center items-center">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: "HTML", icon: "/html.svg" },
-              { name: "CSS", icon: "/css.svg" },
-              { name: "JavaScript", icon: "/js.svg" },
-              { name: "Next.js", icon: "/next.svg" },
-              { name: "NestJS", icon: "/nest.svg" },
-              { name: "Java (OOP)", icon: "/java.svg" },
-              { name: "MySQL", icon: "/mysql.svg" },
-              { name: "Canva", icon: "/canva.svg" },
-              { name: "Figma", icon: "/figma.svg" },
-            ].map((tool) => (
+              {
+                category: "Frontend",
+                tools: [
+                  { name: "HTML", icon: "/html.svg" },
+                  { name: "CSS", icon: "/css.svg" },
+                  { name: "JavaScript", icon: "/js.svg" },
+                  { name: "React", icon: "/react.png" },
+                  { name: "React Native", icon: "/native.png" },
+                  { name: "Next.js", icon: "/next.svg" },
+                ],
+              },
+              {
+                category: "Backend",
+                tools: [
+                  { name: "NestJS", icon: "/nest.svg" },
+                  { name: "Java (OOP)", icon: "/java.svg" },
+                ],
+              },
+              {
+                category: "Database",
+                tools: [
+                  { name: "MySQL", icon: "/mysql.svg" },
+                  { name: "MongoDB", icon: "/mongo.png" },
+                ],
+              },
+              {
+                category: "Design",
+                tools: [
+                  { name: "Canva", icon: "/canva.svg" },
+                  { name: "Figma", icon: "/figma.svg" },
+                ],
+              },
+              {
+                category: "Tools & Collaboration",
+                tools: [
+                  { name: "GitHub", icon: "/git.png" },
+                  { name: "VS Code", icon: "/vs.png" },
+                  { name: "Jira", icon: "/jira.png" },
+                  { name: "ClickUp", icon: "/click.png" },
+                ],
+              },
+            ].map((section, sectionIndex) => (
               <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isToolsInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col items-center group transition-transform hover:scale-105 relative"
-                onClick={() => handleTechClick(tool.name)}
+                key={section.category}
+                initial={{ opacity: 0, y: 50 }}
+                animate={isToolsInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: sectionIndex * 0.1 }}
+                className="backdrop-blur-xl bg-white/5 rounded-2xl p-6 border border-white/20 hover:border-cyan-400/70 hover:bg-white/10 transition-all duration-300 shadow-2xl relative"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-700 group-hover:border-yellow-400 transition-all duration-300 ease-in-out relative cursor-pointer">
-                  <Image
-                    src={tool.icon || "/placeholder.svg"}
-                    alt={tool.name}
-                    width={40}
-                    height={40}
-                    className="object-contain w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
-                  />
-                  <div
-                    className={classnames(
-                      "absolute inset-0 bg-black/80 rounded-full flex items-center justify-center transition-opacity duration-300 ease-in-out",
-                      "opacity-0 group-hover:opacity-100",
-                      "md:opacity-0",
-                      activeTech === tool.name && "opacity-100"
-                    )}
-                  >
-                    <span className="text-xs sm:text-sm font-medium text-yellow-400 text-center px-2">
-                      {tool.name}
-                    </span>
-                  </div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-6 text-center border-b border-white/20 pb-3 relative z-10">
+                  {section.category}
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 relative z-10">
+                  {section.tools.map((tool, toolIndex) => (
+                    <motion.div
+                      key={tool.name}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isToolsInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ duration: 0.4, delay: sectionIndex * 0.1 + toolIndex * 0.05 }}
+                      className="flex flex-col items-center group transition-transform hover:scale-110 relative"
+                      onClick={() => handleTechClick(tool.name)}
+                    >
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 backdrop-blur-md bg-white/10 rounded-xl flex items-center justify-center shadow-lg border border-white/20 group-hover:border-cyan-400/70 group-hover:bg-white/15 transition-all duration-300 ease-in-out relative cursor-pointer">
+                        <Image
+                          src={tool.icon || "/placeholder.svg"}
+                          alt={tool.name}
+                          width={40}
+                          height={40}
+                          className="object-contain w-10 h-10 sm:w-12 sm:h-12"
+                        />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-gray-300 group-hover:text-cyan-400 text-center mt-2 transition-colors duration-300">
+                        {tool.name}
+                      </span>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
             ))}
