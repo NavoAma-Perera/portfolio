@@ -96,17 +96,12 @@ export default function Aboutme() {
               </h2>
 
               <p className="text-cyan-100 text-xl leading-relaxed">
-                I&apos;m an undergraduate passionate about crafting seamless user experiences and turning ideas into
-                impactful digital solutions. My interests span <span className="font-bold text-white">UI design</span>,{" "}
-                <span className="font-bold text-white">web development</span>, and{" "}
-                <span className="font-bold text-white">business analysis</span> — where creativity meets strategy.
+                I&apos;m an undergraduate passionate about crafting seamless user experiences and turning ideas into impactful digital solutions — where creativity meets strategy.
               </p>
 
               <p className="text-cyan-100 text-xl leading-relaxed">
-                I go by <span className="text-yellow-400 font-semibold">SNAP</span>, reflecting my approach — sharp,
-                intentional, and personal. I enjoy designing intuitive interfaces, developing responsive websites, and
-                bringing structure to ideas through thoughtful collaboration. Always eager to learn, create, and grow as a
-                designer, developer, and future leader.
+                I go by <span className="text-yellow-400 font-semibold">SNAP</span>, reflecting my approach. I enjoy designing intuitive interfaces, developing responsive websites, and
+                bringing structure to ideas through thoughtful collaboration. 
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4">
