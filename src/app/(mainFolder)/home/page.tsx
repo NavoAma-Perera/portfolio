@@ -5,6 +5,7 @@ import Aboutme from "./(components)/aboutme"
 import SkillsSection from "./(components)/skills"
 import Projects from "./(components)/projects"
 import Contact from "./(components)/contact"
+import Footer from "./(components)/footer"
 
 interface Particle {
   x: number
@@ -279,6 +280,7 @@ export default function HomePage() {
       <AnimatedSection id="contact">
         <Contact/>
       </AnimatedSection>
+      <Footer />
     </>
   )
 }

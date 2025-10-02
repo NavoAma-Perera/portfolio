@@ -1,8 +1,7 @@
 "use client"
 
 import {
-  Code2,
-  Wrench,
+ 
   MessageCircle,
   Puzzle,
   Users,
@@ -13,6 +12,9 @@ import {
   Heart,
   Palette,
   Crown,
+  Lightbulb,
+  Laptop2Icon,
+
 } from "lucide-react"
 import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
@@ -59,7 +61,7 @@ export default function SkillsSection() {
       >
         <div className="container px-4 md:px-6 flex flex-col items-center justify-center space-y-10 sm:space-y-12 text-center">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
-            <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+            <Lightbulb className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
               <span className="text-white">What I </span>
               <span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent">
@@ -125,7 +127,7 @@ export default function SkillsSection() {
       >
         <div className="container px-4 md:px-6 text-center space-y-12">
           <div className="flex flex-row items-center justify-center gap-4 text-white mb-8">
-            <Wrench className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+            <Laptop2Icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
               <span className="text-white">My </span>
               <span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent">

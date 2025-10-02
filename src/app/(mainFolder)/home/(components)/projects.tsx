@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { SquareKanban } from "lucide-react"
+import { Rocket } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 
 const projects = [
@@ -66,7 +66,7 @@ export default function Projects() {
   return (
     <section className="py-10 max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
       <div className="flex items-center justify-center gap-3 text-white text-3xl sm:text-4xl font-bold tracking-tight mb-12">
-        <SquareKanban className="w-8 h-8 text-white" />
+        <Rocket className="w-8 h-8 text-white" />
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
           What<span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent"> I have Built</span>
         </h2>

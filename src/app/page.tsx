@@ -145,7 +145,7 @@ function AnimatedBackground() {
         ctx.fill()
       })
 
-      const maxDistance = 220
+const maxDistance = window.innerWidth > 768 ? 220 : 120;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
@@ -222,7 +222,11 @@ function AnimatedBackground() {
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      <canvas ref={canvasRef} className="w-full h-full" />
+     <canvas
+  ref={canvasRef}
+  className="w-full h-full bg-[#0a0a0f]"
+/>
+
     </div>
   )
 }
@@ -233,18 +237,22 @@ export default function Home() {
       <AnimatedBackground />
       
       <div className="min-h-screen flex items-center justify-center relative z-10">
-        <div className="flex flex-col items-center justify-center">
-         <div className="flex space-x-6 mb-12">
-  {["S", "N", "A", "P"].map((letter, i) => (
-    <span
-      key={i}
-      className="text-6xl md:text-8xl font-extrabold bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent"
-      aria-label={letter}
-    >
-      {letter}
-    </span>
-  ))}
-</div>
+       <div className="flex flex-col items-center justify-center">
+  <div className="flex space-x-6 mb-4">
+    {["S", "N", "A", "P"].map((letter, i) => (
+      <span
+        key={i}
+        className="text-6xl md:text-8xl font-extrabold bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent"
+        aria-label={letter}
+      >
+        {letter}
+      </span>
+    ))}
+  </div>
+  <div className="text-xl md:text-2xl text-white/90 mb-12">
+    Welcome to my digital space
+  </div>
+
 
 
           <button

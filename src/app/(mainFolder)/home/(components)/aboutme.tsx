@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState, useEffect } from "react"
-import { Paintbrush, ClipboardList, BookOpenText, Code2 } from "lucide-react"
+import { Paintbrush, ClipboardList, Code2, GraduationCap } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Aboutme() {
@@ -18,7 +18,7 @@ export default function Aboutme() {
   }, [])
 
   useEffect(() => {
-      const animatedWords = ["UI Designing", "Business Analysis", "Web development"]
+      const animatedWords = ["Business Analysis", "UI Designing", "Web Development"]
 
     if (!mounted) return
 
@@ -77,7 +77,7 @@ export default function Aboutme() {
                     className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent whitespace-nowrap font-semibold"
                     style={{ filter: "drop-shadow(0 4px 8px rgba(34, 211, 238, 0.3))" }}
                   >
-                    {mounted ? displayedText : "UI Designing"}
+                    {mounted ? displayedText : "Business Analysis"}
                   </span>
                   {mounted && displayedText && (
                     <span
@@ -87,8 +87,8 @@ export default function Aboutme() {
                         transition: "left 0.05s ease-out",
                       }}
                     >
-                      {currentWordIndex === 0 && <Paintbrush className="text-white w-4 h-4" />}
-                      {currentWordIndex === 1 && <ClipboardList className="text-white w-4 h-4" />}
+                      {currentWordIndex === 0 && <ClipboardList className="text-white w-4 h-4" />}
+                      {currentWordIndex === 1 && <Paintbrush className="text-white w-4 h-4" />}
                       {currentWordIndex === 2 && <Code2 className="text-white w-4 h-4" />}
                     </span>
                   )}
@@ -142,7 +142,7 @@ export default function Aboutme() {
       <section className="py-12 md:py-16 lg:py-12 max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-6">
       
         <div className="flex items-center justify-center gap-3 text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mb-16">
-          <BookOpenText className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
+          <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white" />
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
             My Educ<span className="bg-gradient-to-r from-cyan-400 via-white to-yellow-400 bg-clip-text text-transparent">ation Milestone</span>
           </h2>        
@@ -177,7 +177,7 @@ export default function Aboutme() {
               
              
               <div className="w-full max-w-sm sm:max-w-md md:max-w-lg md:w-5/12 md:pr-8 md:text-right pt-2">
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition-all duration-300 shadow-xl shadow-cyan-400/20 flex items-start gap-4">
+                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition-all duration-300 shadow-xl shadow-cyan-400/30 flex items-start gap-4">
                   <div className="flex-shrink-0 w-18 h-19 rounded-lg overflow-hidden border border-gray-700">
                     <Image
                       src="/mora.png"
@@ -220,7 +220,7 @@ export default function Aboutme() {
 
             
               <div className="w-full max-w-sm sm:max-w-md md:max-w-lg md:w-5/12 md:pl-8 pt-2">
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition-all duration-300 shadow-xl shadow-cyan-400/20 flex items-start gap-4">
+                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition-all duration-300 shadow-xl shadow-cyan-400/30 flex items-start gap-4">
                   <div className="flex-shrink-0 w-18 h-18 rounded-lg overflow-hidden border border-gray-700">
                     <Image
                       src="/hrcc.png"
@@ -246,7 +246,7 @@ export default function Aboutme() {
               </div>
             </motion.div>
 
-            {/* hrcc*/}
+            {/* CKC */}
             <motion.div
               className="relative flex justify-center md:justify-start"
               initial={{ opacity: 0, x: -50 }}
@@ -272,7 +272,7 @@ export default function Aboutme() {
 
          
               <div className="w-full max-w-sm sm:max-w-md md:max-w-lg md:w-5/12 md:pr-8 md:text-right pt-2">
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition-all duration-300 shadow-xl shadow-cyan-400/20 flex items-start gap-4">
+                <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-cyan-400/30 hover:border-cyan-400/70 transition-all duration-300 shadow-xl shadow-cyan-400/30 flex items-start gap-4">
                   <div className="flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-gray-700">
                     <Image
                       src="/ckc.png"
