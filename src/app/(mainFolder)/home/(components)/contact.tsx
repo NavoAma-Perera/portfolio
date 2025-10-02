@@ -74,8 +74,8 @@ export default function Contact() {
         className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl"
       >
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: 0, y: 100 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           className="space-y-6 flex flex-col justify-center items-center md:items-start"
@@ -126,8 +126,8 @@ export default function Contact() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: 0, y: 100 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
           className="backdrop-blur-xl bg-white/5 p-8 rounded-2xl border border-white/20 shadow-2xl w-full md:self-start mt-4 md:mt-0 relative"
