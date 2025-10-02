@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect} from "react"
 import { motion, useInView } from "framer-motion"
 import Aboutme from "./(components)/aboutme"
 import SkillsSection from "./(components)/skills"
@@ -115,7 +115,7 @@ function AnimatedBackground() {
         ctx.stroke()
       }
 
-      particles.forEach((particle, index) => {
+      particles.forEach((particle) => {
         particle.x += particle.vx
         particle.y += particle.vy
 
